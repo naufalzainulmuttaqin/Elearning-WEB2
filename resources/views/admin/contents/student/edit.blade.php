@@ -19,27 +19,46 @@
                     @method('PUT')
                     <div class="mb-2">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" id="name" class="form-control" value="{{ $student->name ?? '' }}">
+                        <input type="text" name="name" id="name" class="form-control"
+                            value="{{ $student->name ?? '' }}">
                     </div>
 
                     <div class="mb-2">
                         <label for="nim" class="form-label">NIM</label>
-                        <input type="text" name="nim" id="nim" class="form-control"  value="{{ $student->nim ?? '' }}">
+                        <input type="text" name="nim" id="nim" class="form-control"
+                            value="{{ $student->nim ?? '' }}">
                     </div>
 
                     <div class="mb-2">
                         <label for="major" class="form-label">Major</label>
                         <select name="major" id="major" class="form-select">
                             <option value="">Pilih Jurusan</option>
-                            <option value="Teknik Informatika"{{ $student->major == 'Teknik Informatika' ? 'selected' : ''}}>Teknik Informatika</option>
-                            <option value="Sistem Informasi"{{ $student->major == 'Sistem Informasi' ? 'selected' : ''}}>Sistem Informasi</option>
-                            <option value="Bisnis Digital"{{ $student->major == 'Bisnis Digital' ? 'selected' : ''}}>Bisnis Digital</option>
+                            <option
+                                value="Teknik Informatika"{{ $student->major == 'Teknik Informatika' ? 'selected' : '' }}>
+                                Teknik Informatika</option>
+                            <option value="Sistem Informasi"{{ $student->major == 'Sistem Informasi' ? 'selected' : '' }}>
+                                Sistem Informasi</option>
+                            <option value="Bisnis Digital"{{ $student->major == 'Bisnis Digital' ? 'selected' : '' }}>Bisnis
+                                Digital</option>
                         </select>
                     </div>
 
                     <div class="mb-2">
                         <label for="class" class="form-label">Class</label>
-                        <input type="text" name="class" id="class" class="form-control"  value="{{ $student->class ?? '' }}">
+                        <input type="text" name="class" id="class" class="form-control"
+                            value="{{ $student->class ?? '' }}">
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="course_id" class="form-label">Course</label>
+                        <select name="course_id" id="course_id" class="form-select">
+                            <option value="">Choose a course</option>
+                            @foreach($courses as $course)
+                                <option value="{{ $course->id }}" {{ $student->course_id == $course->id ? 'selected' : '' }}>
+                                    {{ $course->name }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="mb-4">

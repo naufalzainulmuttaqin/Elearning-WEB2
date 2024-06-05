@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Courses;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,12 @@ class StudentController extends Controller
 
     // method untuk menampilkan form tambah student
     public function create(){
-        return view('admin.contents.student.create');
+        // mendapatkan data courses
+        $courses = Courses::all();
+        // panggil view
+        return view('admin.contents.student.create', [
+            'courses'=> $courses
+        ]);
     }
 
     public function store(Request $request){
@@ -30,7 +36,8 @@ class StudentController extends Controller
             'name'=> 'required',
             'nim'=> 'required|numeric',
             'major'=> 'required',
-            'class'=> 'required'
+            'class'=> 'required',
+            'course_id'=> 'nullable'
         ]);
 
         // simpan ke database
@@ -39,6 +46,7 @@ class StudentController extends Controller
             'nim' => $request->nim,
             'major' => $request->major,
             'class' => $request->class,
+            'course_id'=> $request->course_id
         ]);
 
         // kembalikan kehalaman student
@@ -49,8 +57,10 @@ class StudentController extends Controller
     public function edit($id){
         // cari data student berdasarkan id
         $student = Student::find($id); //select * FROM students WHERE id;
+        $courses = Courses::all();
         return view('admin.contents.student.edit',[
-            'student' => $student
+            'student' => $student,
+            'courses' => $courses
         ]);
     }
 
@@ -63,7 +73,8 @@ class StudentController extends Controller
             'name'=> 'required',
             'nim'=> 'required|numeric',
             'major'=> 'required',
-            'class'=> 'required'
+            'class'=> 'required',
+            'course_id'=> 'nullable'
         ]);
 
         // simpan perubahan
@@ -72,6 +83,7 @@ class StudentController extends Controller
             'nim' => $request->nim,
             'major' => $request->major,
             'class' => $request->class,
+            'course_id'=> $request->course_id
         ]);
 
         // kembali kehalaman student

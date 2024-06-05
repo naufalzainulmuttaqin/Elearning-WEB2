@@ -35,6 +35,17 @@
                             <option value="Bisnis Digital">Bisnis Digital</option>
                         </select>
                     </div>
+                    <div class="mb-2">
+                        <label for="course_id" class="form-label">Course</label>
+                        <select name="course_id" id="course_id" class="form-select">
+                            <option value="">Choose a course</option>
+                            
+                            @foreach($courses as $course)
+                                <option value="{{ $course->id }}">{{ $course->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    
 
                     <div class="mb-2">
                         <label for="class" class="form-label">Class</label>
