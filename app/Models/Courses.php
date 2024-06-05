@@ -9,4 +9,7 @@ class Courses extends Model
 {
     use HasFactory;
     protected $table = 'courses';
+
+    // mendeginisikan field yg blh diisi
+    protected $fillable = ['name', 'category', 'desc'];
 }
